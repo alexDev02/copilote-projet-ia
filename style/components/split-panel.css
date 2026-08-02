@@ -1,0 +1,81 @@
+/* ==========================================================================
+   SPLIT PANEL — layout générique "sommaire à gauche / contenu à droite"
+   Consommé par onboarding/gate.ts (Module 1) et tools/render.ts (Module 3).
+   Ne pas dupliquer ce pattern ailleurs : voir ARCHITECTURE.md.
+   ========================================================================== */
+
+.split-panel {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.split-panel-nav {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  position: sticky;
+  top: var(--space-4);
+}
+
+.split-panel-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  transition: all var(--transition-fast);
+}
+
+.split-panel-nav-item:hover {
+  background: var(--color-bg-subtle);
+}
+
+.split-panel-nav-item.active {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.split-panel-nav-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  min-width: 20px;
+}
+
+.split-panel-nav-item.active .split-panel-nav-index {
+  color: var(--color-accent);
+}
+
+.split-panel-content {
+  min-width: 0;
+}
+
+/* En dessous d'une largeur tablette/mobile, on empile plutôt que de forcer
+   deux colonnes étroites — cohérent avec le fait que l'app cible d'abord
+   un usage desktop de pilotage de projet, mais reste lisible en secours. */
+@media (max-width: 768px) {
+  .split-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .split-panel-nav {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}

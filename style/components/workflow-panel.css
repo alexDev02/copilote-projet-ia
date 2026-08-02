@@ -1,0 +1,76 @@
+/* ==========================================================================
+   WORKFLOW PANEL — Module 2 : viewer de prompt + formulaire de configuration
+   ========================================================================== */
+
+.prompt-viewer {
+  position: sticky;
+  top: var(--space-4);
+  z-index: 10;
+  background: var(--color-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.prompt-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.prompt-viewer-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a8a4c4;
+}
+
+.prompt-viewer-output {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #f4f2ec;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  white-space: pre-wrap;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.workflow-header .text-muted {
+  font-size: 0.9rem;
+  margin-top: var(--space-1);
+}
+
+.workflow-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.template-choice {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.template-choice label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
