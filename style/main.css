@@ -1,0 +1,19 @@
+/*
+  Placeholder — le design system complet (tokens.css, composants, typographie
+  de la charte "Dossier de pilotage") est livré au Lot 1.
+  Ce fichier ne contient volontairement qu'un reset minimal pour que le Lot 0
+  soit buildable de façon autonome.
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}

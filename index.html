@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      CSP stricte (Option A assumée, cf. ARCHITECTURE.md).
+      Pas de source externe autorisée : les polices de la charte (Fraunces, IBM Plex Sans,
+      JetBrains Mono) devront être self-hosted au Lot 1 plutôt que chargées depuis un CDN,
+      pour ne pas avoir à affaiblir cette CSP avec un domaine tiers.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none';"
+    />
+    <title>Copilote Projet IA</title>
+    <link rel="stylesheet" href="/style/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Contenu injecté par src/main.ts. Structure header/sidebar/main-content ajoutée au Lot 5. -->
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

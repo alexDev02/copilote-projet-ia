@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./tsconfig.node.json"]
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "eslint-config-prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-non-null-assertion": "error",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      { "allowExpressions": true }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-floating-promises": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-restricted-globals": ["error", "eval"],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "MemberExpression[property.name='innerHTML']",
+        "message": "innerHTML interdit avec des données non sanitizées — voir prompt/sanitize.ts et la note sécurité d'ARCHITECTURE.md."
+      }
+    ]
+  },
+  "ignorePatterns": ["dist", "node_modules"]
+}
