@@ -34,16 +34,28 @@ export function parseLivrable(raw: unknown): LivrableParseResult {
     return { ok: false, raison: `Champ 'nom' manquant ou invalide pour id="${candidate['id']}"` };
   }
   if (!isNonEmptyString(candidate['categorie'])) {
-    return { ok: false, raison: `Champ 'categorie' manquant ou invalide pour id="${candidate['id']}"` };
+    return {
+      ok: false,
+      raison: `Champ 'categorie' manquant ou invalide pour id="${candidate['id']}"`,
+    };
   }
   if (!isNonEmptyString(candidate['description'])) {
-    return { ok: false, raison: `Champ 'description' manquant ou invalide pour id="${candidate['id']}"` };
+    return {
+      ok: false,
+      raison: `Champ 'description' manquant ou invalide pour id="${candidate['id']}"`,
+    };
   }
   if (!isStringArray(candidate['variables'])) {
-    return { ok: false, raison: `Champ 'variables' manquant ou invalide pour id="${candidate['id']}"` };
+    return {
+      ok: false,
+      raison: `Champ 'variables' manquant ou invalide pour id="${candidate['id']}"`,
+    };
   }
   if (!isNonEmptyString(candidate['promptTexte'])) {
-    return { ok: false, raison: `Champ 'promptTexte' manquant ou invalide pour id="${candidate['id']}"` };
+    return {
+      ok: false,
+      raison: `Champ 'promptTexte' manquant ou invalide pour id="${candidate['id']}"`,
+    };
   }
 
   const livrable: Livrable = {
@@ -77,7 +89,9 @@ export async function loadLivrables(): Promise<readonly Livrable[]> {
 
   const data: unknown = await response.json();
   const rawList =
-    typeof data === 'object' && data !== null && Array.isArray((data as { livrables?: unknown }).livrables)
+    typeof data === 'object' &&
+    data !== null &&
+    Array.isArray((data as { livrables?: unknown }).livrables)
       ? (data as { livrables: unknown[] }).livrables
       : [];
 

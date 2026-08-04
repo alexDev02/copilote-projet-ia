@@ -87,7 +87,10 @@ function buildAcknowledgeRow(): HTMLLabelElement {
     store.setOnboardingComplete(checkbox.checked);
   });
 
-  label.append(checkbox, document.createTextNode('J’ai terminé ce module de formation (ne plus afficher)'));
+  label.append(
+    checkbox,
+    document.createTextNode('J’ai terminé ce module de formation (ne plus afficher)'),
+  );
   return label;
 }
 
