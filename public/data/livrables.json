@@ -1,0 +1,44 @@
+{
+  "livrables": [
+    {
+      "id": "prompt-charte-projet",
+      "nom": "Charte de Projet",
+      "categorie": "Cadrage",
+      "description": "Établit le cadrage initial : contexte, objectifs SMART, périmètre et parties prenantes.",
+      "variables": ["projectName", "mainObjective", "stakeholders", "constraints"],
+      "promptTexte": "Tu es un Chef de Projet Senior. Rédige une Charte de Projet complète et professionnelle pour le projet suivant.\n\nNom du projet : {{projectName}}\nObjectif principal : {{mainObjective}}\nParties prenantes clés : {{stakeholders}}\nContraintes connues : {{constraints}}\n\nStructure attendue :\n1. Contexte et enjeux\n2. Objectifs SMART\n3. Périmètre (inclus / exclus)\n4. Parties prenantes et gouvernance\n5. Livrables principaux attendus\n6. Contraintes et risques majeurs identifiés"
+    },
+    {
+      "id": "prompt-wbs-decoupage",
+      "nom": "Structure WBS",
+      "categorie": "Cadrage",
+      "description": "Découpe le projet en lots de travail hiérarchisés (Work Breakdown Structure).",
+      "variables": ["projectName", "mainDeliverables", "wbsDepth"],
+      "promptTexte": "Tu es un Chef de Projet Senior spécialisé en planification. À partir des informations suivantes, construis une Structure de Découpage de Projet (WBS) sous forme d'arborescence hiérarchique numérotée.\n\nNom du projet : {{projectName}}\nLivrables principaux visés : {{mainDeliverables}}\nNiveau de détail souhaité : {{wbsDepth}}\n\nPrésente le résultat sous forme de liste hiérarchique numérotée (1., 1.1, 1.1.1...), en couvrant l'ensemble du cycle de vie du projet du cadrage à la clôture."
+    },
+    {
+      "id": "prompt-matrice-raci",
+      "nom": "Matrice RACI",
+      "categorie": "Cadrage",
+      "description": "Clarifie les rôles et responsabilités de chaque partie prenante sur les activités clés.",
+      "variables": ["projectName", "activities", "roles"],
+      "promptTexte": "Tu es un Chef de Projet Senior. Construis une Matrice RACI (Responsable, Approbateur, Consulté, Informé) au format tableau Markdown pour le projet suivant.\n\nNom du projet : {{projectName}}\nActivités ou livrables à couvrir : {{activities}}\nRôles / parties prenantes impliqués : {{roles}}\n\nLe tableau doit lister les activités en lignes et les rôles en colonnes, avec une seule lettre R, A, C ou I par cellule. Ajoute une courte note si une activité n'a pas de A clairement identifié."
+    },
+    {
+      "id": "prompt-sfd-specifications",
+      "nom": "SFD / Spécifications",
+      "categorie": "Conception",
+      "description": "Rédige des spécifications fonctionnelles détaillées à partir d'un besoin exprimé.",
+      "variables": ["projectScope", "targetUsers", "inputDocs"],
+      "promptTexte": "Tu es un Business Analyst Senior. Rédige des Spécifications Fonctionnelles Détaillées (SFD) structurées à partir du besoin suivant.\n\nPérimètre fonctionnel : {{projectScope}}\nUtilisateurs cibles : {{targetUsers}}\nDocuments d'entrée fournis en pièce jointe : {{inputDocs}}\n\nStructure attendue :\n1. Vue d'ensemble et objectifs\n2. Description détaillée des fonctionnalités (une section par fonctionnalité)\n3. Règles de gestion (numérotées RG_XX)\n4. Contraintes non fonctionnelles pertinentes"
+    },
+    {
+      "id": "prompt-cahier-recette",
+      "nom": "Cahier de Recette",
+      "categorie": "Qualité",
+      "description": "Génère un plan de tests d'acceptation à partir des exigences fonctionnelles.",
+      "variables": ["projectScope", "inputDocs", "acceptanceCriteria"],
+      "promptTexte": "Tu es un Responsable QA Senior. À partir du besoin fonctionnel suivant, génère un Cahier de Tests de Recette sous forme de tableau Markdown (colonnes : ID, Exigence liée, Titre du cas de test, Préconditions, Étapes, Résultat attendu).\n\nPérimètre fonctionnel à tester : {{projectScope}}\nDocuments d'entrée référencés : {{inputDocs}}\nCritères d'acceptation connus : {{acceptanceCriteria}}\n\nCouvre à la fois les cas nominaux et les cas aux limites/erreurs pour chaque exigence identifiée."
+    }
+  ]
+}
