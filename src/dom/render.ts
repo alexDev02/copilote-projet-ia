@@ -174,7 +174,10 @@ function renderLivrablePanel(livrable: Livrable, main: HTMLElement): void {
   });
 
   const viewerHeader = el('div', { className: 'prompt-viewer-header' });
-  viewerHeader.append(el('span', { className: 'prompt-viewer-label', text: 'Prompt généré' }), copyButton);
+  viewerHeader.append(
+    el('span', { className: 'prompt-viewer-label', text: 'Prompt généré' }),
+    copyButton,
+  );
 
   const viewer = el('section', { className: 'prompt-viewer' });
   viewer.append(viewerHeader, promptOutput);
@@ -235,7 +238,9 @@ function renderLivrablePanel(livrable: Livrable, main: HTMLElement): void {
       }
     });
     const text =
-      option === 'defaut' ? 'Utiliser le modèle de structure par défaut' : 'Utiliser mon propre modèle (en pièce jointe)';
+      option === 'defaut'
+        ? 'Utiliser le modèle de structure par défaut'
+        : 'Utiliser mon propre modèle (en pièce jointe)';
     optionLabel.append(radio, document.createTextNode(` ${text}`));
     templateChoice.append(optionLabel);
   });
@@ -267,7 +272,10 @@ export function renderMainPlaceholder(livrables: readonly Livrable[]): void {
 
   if (activeView.type === 'outils') {
     const title = el('h2', { text: 'Autres outils utiles' });
-    const body = el('p', { className: 'text-muted', text: 'Contenu du Module 3 (outils) — arrive au Lot 8.' });
+    const body = el('p', {
+      className: 'text-muted',
+      text: 'Contenu du Module 3 (outils) — arrive au Lot 8.',
+    });
     body.style.marginTop = 'var(--space-3)';
     const card = el('section', { className: 'card' });
     card.append(title, body);
