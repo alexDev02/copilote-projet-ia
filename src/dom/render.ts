@@ -10,6 +10,7 @@
  */
 
 import { IA_LABELS, IA_CIBLES } from '../constants';
+import { renderOnboarding } from '../onboarding/gate';
 import { store } from '../state/store';
 import type { Livrable } from '../types/livrable';
 
@@ -121,14 +122,16 @@ export function renderMainPlaceholder(livrables: readonly Livrable[]): void {
   const main = requireElementById('main-content');
   const activeView = store.getState().activeView;
 
+  if (activeView.type === 'onboarding') {
+    renderOnboarding(main);
+    return;
+  }
+
   const title = el('h2');
   const body = el('p', { className: 'text-muted' });
   body.style.marginTop = 'var(--space-3)';
 
-  if (activeView.type === 'onboarding') {
-    title.textContent = 'Avant de commencer';
-    body.textContent = 'Contenu du Module 1 (onboarding) — arrive au Lot 6.';
-  } else if (activeView.type === 'outils') {
+  if (activeView.type === 'outils') {
     title.textContent = 'Autres outils utiles';
     body.textContent = 'Contenu du Module 3 (outils) — arrive au Lot 8.';
   } else {

@@ -30,7 +30,7 @@ interface Store {
   subscribe(listener: Listener): () => void;
   getState(): Readonly<AppState>;
   setIaCible(ia: IaCible): void;
-  completeOnboarding(): void;
+  setOnboardingComplete(complete: boolean): void;
   showOnboarding(): void;
   showOutils(): void;
   selectLivrable(livrableId: string): void;
@@ -72,9 +72,9 @@ function createStore(): Store {
       notify();
     },
 
-    completeOnboarding(): void {
-      state = { ...state, onboardingComplete: true };
-      storage.setOnboardingComplete(true);
+    setOnboardingComplete(complete: boolean): void {
+      state = { ...state, onboardingComplete: complete };
+      storage.setOnboardingComplete(complete);
       notify();
     },
 
