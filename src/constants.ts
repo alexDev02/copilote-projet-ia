@@ -33,4 +33,4 @@ export const IA_LABELS: Record<IaCible, string> = {
 export const DEFAULT_IA_CIBLE: IaCible = 'chatgpt';
 
 /** Chemin du référentiel de livrables statique (Lot 4). */
-export const LIVRABLES_JSON_PATH = '/data/livrables.json';
+export const LIVRABLES_JSON_PATH = `${import.meta.env.BASE_URL}data/livrables.json`;

@@ -1,14 +1,21 @@
 /**
  * État runtime de l'application. C'est la source de vérité pour le rendu
- * (dom/render.ts, Lot 5+) — jamais l'inverse. `storage.ts` sert uniquement
- * à persister/relire, il n'est jamais lu directement par les vues.
+ * (dom/render.ts) — jamais l'inverse. `storage.ts` sert uniquement à
+ * persister/relire, il n'est jamais lu directement par les vues.
  *
  * Pattern pub/sub minimal (pas de framework, cf. ARCHITECTURE.md) :
  * les vues s'abonnent avec `subscribe`, et sont notifiées à chaque mutation.
+ *
+ * Note (Lot 7) : les brouillons de formulaire (Module 2) ne transitent PAS
+ * par ce store. Les faire passer par `notify()` provoquerait un re-rendu
+ * complet du panneau à chaque frappe clavier, et donc une perte de focus
+ * sur le champ en cours de saisie. La persistance des brouillons est gérée
+ * localement dans dom/render.ts, en appelant state/storage.ts directement,
+ * avec un debounce (utils/debounce.ts).
  */
 
 import * as storage from './storage';
-import type { IaCible, LivrableDraft } from '../types/livrable';
+import type { IaCible } from '../types/livrable';
 
 /** Identifie le panneau actuellement affiché dans la zone de travail. */
 export type ActiveView =
@@ -20,8 +27,6 @@ interface AppState {
   iaCible: IaCible;
   onboardingComplete: boolean;
   activeView: ActiveView;
-  /** Brouillon du livrable actuellement affiché, tenu en mémoire pour un accès synchrone. */
-  currentDraft: LivrableDraft;
 }
 
 type Listener = () => void;
@@ -34,7 +39,6 @@ interface Store {
   showOnboarding(): void;
   showOutils(): void;
   selectLivrable(livrableId: string): void;
-  updateDraftValue(livrableId: string, key: string, value: string): void;
 }
 
 function createStore(): Store {
@@ -44,7 +48,6 @@ function createStore(): Store {
     iaCible: storage.getIaCible(),
     onboardingComplete,
     activeView: onboardingComplete ? { type: 'outils' } : { type: 'onboarding' },
-    currentDraft: {},
   };
 
   const listeners = new Set<Listener>();
@@ -88,21 +91,8 @@ function createStore(): Store {
       notify();
     },
 
-    /** Change de livrable actif et recharge son brouillon persisté en mémoire. */
     selectLivrable(livrableId: string): void {
-      state = {
-        ...state,
-        activeView: { type: 'livrable', livrableId },
-        currentDraft: storage.getDraft(livrableId),
-      };
-      notify();
-    },
-
-    /** Met à jour une variable du brouillon courant et persiste immédiatement. */
-    updateDraftValue(livrableId: string, key: string, value: string): void {
-      const nextDraft: LivrableDraft = { ...state.currentDraft, [key]: value };
-      state = { ...state, currentDraft: nextDraft };
-      storage.saveDraft(livrableId, nextDraft);
+      state = { ...state, activeView: { type: 'livrable', livrableId } };
       notify();
     },
   };
