@@ -1,13 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--
       CSP stricte (Option A assumée, cf. ARCHITECTURE.md).
-      Pas de source externe autorisée : les polices de la charte (Fraunces, IBM Plex Sans,
-      JetBrains Mono) devront être self-hosted au Lot 1 plutôt que chargées depuis un CDN,
-      pour ne pas avoir à affaiblir cette CSP avec un domaine tiers.
+      Pas de source externe autorisée : les polices de la charte sont
+      self-hosted depuis /fonts (voir scripts/fetch-fonts.sh, Lot 1).
     -->
     <meta
       http-equiv="Content-Security-Policy"
@@ -17,9 +16,24 @@
     <link rel="stylesheet" href="/style/main.css" />
   </head>
   <body>
-    <div id="app">
-      <!-- Contenu injecté par src/main.ts. Structure header/sidebar/main-content ajoutée au Lot 5. -->
+    <header class="app-header">
+      <div class="brand-logo">Copilote Projet <span class="brand-badge">IA</span></div>
+      <div style="display: flex; align-items: center; gap: 16px">
+        <button id="btn-formations" class="btn btn-outline" type="button">Formations</button>
+        <label class="label-caps" for="ia-select" style="margin-right: -8px">Mon IA</label>
+        <select id="ia-select" class="form-control" style="width: auto"></select>
+      </div>
+    </header>
+
+    <div class="app-container">
+      <aside id="sidebar" class="sidebar">
+        <!-- Rempli dynamiquement par src/dom/render.ts -->
+      </aside>
+      <main id="main-content" class="main-content">
+        <!-- Rempli dynamiquement par src/dom/render.ts -->
+      </main>
     </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
