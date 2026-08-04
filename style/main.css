@@ -129,6 +129,33 @@ p {
   max-width: 1100px;
 }
 
+/* Responsive — corrige le chevauchement du header sur petit écran (hauteur
+   fixe + pas de retour à la ligne). Voir aussi split-panel.css pour le même
+   traitement des Modules 1/3. */
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    height: auto;
+    flex-wrap: wrap;
+    row-gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .main-content {
+    padding: var(--space-4);
+  }
+}
+
 /* Cartes — aplat, bordure fine, pas d'ombre par défaut */
 .card {
   background: var(--color-bg-card);
